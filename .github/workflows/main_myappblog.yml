@@ -19,13 +19,16 @@ jobs:
           node-version: '14'
 
       - name: Install dependencies
-        run: npm install --prefix ./blog-project
+        run: npm install
+        working-directory: ./blog-project
 
       - name: Build the project
-        run: npm run build --prefix ./blog-project
+        run: npm run build
+        working-directory: ./blog-project
 
       - name: Run tests
-        run: npm test --prefix ./blog-project
+        run: npm test
+        working-directory: ./blog-project
 
   deploy:
     runs-on: ubuntu-latest
@@ -41,11 +44,12 @@ jobs:
           node-version: '14'
 
       - name: Install dependencies
-        run: npm install --prefix ./blog-project
+        run: npm install
+        working-directory: ./blog-project
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'myappblog'  # Reemplaza con el nombre de tu Azure Web App
+          app-name: 'myappblog'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: ./blog-project
