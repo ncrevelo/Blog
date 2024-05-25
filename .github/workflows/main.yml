@@ -27,13 +27,13 @@ jobs:
 
       - name: Build
         run: npm run build
-        working-directory: ./blog-project
+        working-directory: ./blog-project/client
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v2
         with:
           name: node-build
-          path: ./blog-project/build
+          path: ./blog-project/client/build
 
   deploy:
     runs-on: ubuntu-latest
@@ -47,7 +47,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: node-build
-          path: ./blog-project/build
+          path: ./blog-project/client/build
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
