@@ -3,7 +3,7 @@ name: Build and Deploy Node.js App to Azure Web App
 on:
   push:
     branches:
-      - main  # Cambia esto si usas una rama diferente
+      - main  
 
 jobs:
   build:
@@ -51,15 +51,20 @@ jobs:
       - name: Set secrets from Azure Key Vault
         uses: azure/keyvault-secrets@v1
         with:
-          keyvault: <your-keyvault-name>  # Reemplaza con el nombre de tu Key Vault
+          keyvault: 'miblog'
           secrets: |
             AZURE_CLIENT_ID=clientId
             AZURE_CLIENT_SECRET=clientSecret
             AZURE_TENANT_ID=tenantId
             AZURE_SUBSCRIPTION_ID=subscriptionId
 
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./blog-project
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'myappblog' 
           package: ./blog-project
+
