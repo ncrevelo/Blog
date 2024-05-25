@@ -1,17 +1,17 @@
+{
   "name": "blog-project",
   "version": "1.0.0",
+  "description": "A sample blog project",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "your-build-command-here"
+    "start": "node server.js",
+    "build": "echo 'building...' && exit 0",
+    "test": "echo 'Error: no test specified' && exit 1"
   },
-    "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.19.2",
-    "mongoose": "^8.4.0",
-    "pg": "^8.11.5"
-  }
-}
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "author": "Your Name",
+  "license": "ISC"
 }
