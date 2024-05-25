@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './PostForm.css';
 
 const PostForm = () => {
   const [title, setTitle] = useState('');
@@ -7,7 +8,7 @@ const PostForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch('http://localhost:5000/posts', { // Asegúrate de que la URL sea correcta
+    fetch('http://localhost:5000/posts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -31,25 +32,28 @@ const PostForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <form onSubmit={handleSubmit} className="post-form">
+      <div className="form-group">
         <label>Title:</label>
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          className="form-control"
         />
       </div>
-      <div>
+      <div className="form-group">
         <label>Content:</label>
         <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
+          className="form-control"
         ></textarea>
       </div>
-      <button type="submit">Add Post</button>
+      <button type="submit" className="btn btn-primary">Add Post</button>
     </form>
   );
 };
 
 export default PostForm;
+

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './PostList.css';
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
@@ -27,14 +28,14 @@ const PostList = () => {
   };
 
   return (
-    <div>
+    <div className="post-list">
       <h2>Posts</h2>
       <ul>
         {posts.map(post => (
-          <li key={post.id}>
+          <li key={post.id} className="post-item">
             <h3>{post.title}</h3>
             <p>{post.content}</p>
-            <button onClick={() => handleDelete(post.id)}>Delete</button>
+            <button onClick={() => handleDelete(post.id)} className="btn btn-danger">Delete</button>
           </li>
         ))}
       </ul>

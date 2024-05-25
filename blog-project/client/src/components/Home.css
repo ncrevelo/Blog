@@ -1,0 +1,65 @@
+.home {
+  padding: 20px;
+}
+
+.welcome-section {
+  margin-bottom: 40px;
+}
+
+.posts-section {
+  margin-top: 20px;
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.post-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.post-card h3 {
+  margin-top: 0;
+}
+
+.post-card p {
+  color: #666666;
+}
+
+.post-card .read-more-btn,
+.post-card .delete-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  margin-right: 10px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.post-card .delete-btn {
+  background-color: #dc3545;
+}
+
+.post-card .read-more-btn:hover,
+.post-card .delete-btn:hover {
+  background-color: #0056b3;
+}
+
+.post-card .delete-btn:hover {
+  background-color: #c82333;
+}
+
+.post-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}

@@ -3,38 +3,37 @@ const { Pool } = require('pg');
 const cors = require('cors');
 
 const app = express();
-const port = 5000; 
+const port = 5000;
 
 app.use(cors());
 app.use(express.json());
 
 const pool = new Pool({
-  user: 'nathalia', 
+  user: 'nathalia',
   host: 'blognath.postgres.database.azure.com', 
   database: 'postgres', 
   password: 'Floresita12.', 
   port: 5432,
-ssl: {
+  ssl: {
     rejectUnauthorized: false,
-},
+  },
 });
 
 
 pool.query(
-`CREATE TABLE IF NOT EXISTS posts (
+  `CREATE TABLE IF NOT EXISTS posts (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL
-)`,
-(err, res) => {
+  )`,
+  (err, res) => {
     if (err) {
-    console.error(err);
+      console.error(err);
     } else {
-    console.log('Table is successfully created');
+      console.log('Table is successfully created');
     }
-}
+  }
 );
-
 
 app.get('/posts', async (req, res) => {
   try {
@@ -61,6 +60,7 @@ app.post('/posts', async (req, res) => {
   }
 });
 
+
 app.delete('/posts/:id', async (req, res) => {
   const { id } = req.params;
   try {
@@ -73,10 +73,25 @@ app.delete('/posts/:id', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal server error' });
-}
+  }
+});
+
+
+app.get('/posts/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query('SELECT * FROM posts WHERE id = $1', [id]);
+    if (result.rowCount === 0) {
+      res.status(404).json({ error: 'Post not found' });
+    } else {
+      res.json(result.rows[0]);
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 app.listen(port, () => {
-console.log(`Server running on port ${port}`);
+  console.log(`Server running on port ${port}`);
 });
-

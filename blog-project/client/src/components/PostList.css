@@ -1,0 +1,29 @@
+.post-list {
+  padding: 20px;
+}
+
+.post-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.post-item h3 {
+  margin-top: 0;
+}
+
+.post-item p {
+  color: #666;
+}
+
+.post-item .btn {
+  margin-right: 10px;
+}
+
+.post-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}

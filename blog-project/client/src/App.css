@@ -3,9 +3,9 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #a36794;
   padding: 20px;
-  color: white;
+  color: rgb(247, 247, 247);
 }
 
 nav ul {
@@ -19,7 +19,7 @@ nav ul li {
 }
 
 nav ul li a {
-  color: white;
+  color: rgb(240, 230, 244);
   text-decoration: none;
 }
 
