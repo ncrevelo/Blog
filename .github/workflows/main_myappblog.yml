@@ -3,7 +3,8 @@ name: Build and Deploy Node.js App to Azure Web App
 on:
   push:
     branches:
-      - main 
+      - main  # Cambia esto si usas una rama diferente
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,20 +18,14 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Change directory to blog-project
-        run: cd blog-project
-
       - name: Install dependencies
-        run: npm install
-        working-directory: ./blog-project
+        run: npm install --prefix ./blog-project
 
       - name: Build the project
-        run: npm run build
-        working-directory: ./blog-project
+        run: npm run build --prefix ./blog-project
 
       - name: Run tests
-        run: npm test
-        working-directory: ./blog-project
+        run: npm test --prefix ./blog-project
 
   deploy:
     runs-on: ubuntu-latest
@@ -46,15 +41,11 @@ jobs:
           node-version: '14'
 
       - name: Install dependencies
-        run: npm install
-        working-directory: ./blog-project
+        run: npm install --prefix ./blog-project
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'myappblog' 
+          app-name: 'myappblog'  # Reemplaza con el nombre de tu Azure Web App
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: ./blog-project
-
-          package: .
-          
