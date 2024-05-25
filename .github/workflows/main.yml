@@ -1,39 +1,44 @@
-name: Build and Deploy
+name: CI
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout repository content
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: '14'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./blog-project
 
-    - name: Build project
-      run: npm run build
+      - name: Build
+        run: npm run build
+        working-directory: ./blog-project
 
-    - name: Azure Login
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+      # Omitiendo los tests
+      # - name: Run tests
+      #   run: npm test
+      #   working-directory: ./blog-project
 
-    - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
-        slot-name: 'production'
+      - name: Upload production-ready build files
+        uses: actions/upload-artifact@v2
+        with:
+          name: node-build
+          path: ./build
 
 
 
