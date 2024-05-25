@@ -18,15 +18,16 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Change directory to blog-project
-        run: cd blog-project
-
       - name: Install dependencies
         run: npm install
         working-directory: ./blog-project
 
       - name: Build the project
         run: npm run build
+        working-directory: ./blog-project
+
+      - name: Run tests
+        run: npm test
         working-directory: ./blog-project
 
   deploy:
@@ -42,17 +43,23 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./blog-project
-
       - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      - name: Set secrets from Azure Key Vault
+        uses: azure/keyvault-secrets@v1
+        with:
+          keyvault: <your-keyvault-name>  # Reemplaza con el nombre de tu Key Vault
+          secrets: |
+            AZURE_CLIENT_ID=clientId
+            AZURE_CLIENT_SECRET=clientSecret
+            AZURE_TENANT_ID=tenantId
+            AZURE_SUBSCRIPTION_ID=subscriptionId
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'myappblog'  # Reemplaza con el nombre de tu Azure Web App
+          app-name: 'myappblog' 
           package: ./blog-project
