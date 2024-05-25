@@ -38,5 +38,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: node-build
-          path: ./build
-
+          path: ./blog-project/build
